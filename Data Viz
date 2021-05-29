@@ -1,0 +1,108 @@
+import pandas as pd
+pd.plotting.register_matplotlib_converters()
+import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
+# Path of the file to read
+museum_filepath = "../input/museum_visitors.csv"
+
+# Fill in the line below to read the file into a variable museum_data
+museum_data = pd.read_csv(museum_filepath,index_col='Date', parse_dates=True)
+
+# Print the last five rows of the data 
+print(museum_data.tail())
+
+# Fill in the line below: How many visitors did the Chinese American Museum 
+# receive in July 2018?
+ca_museum_jul18 = museum_data['Chinese American Museum'].loc['2018-07-01']
+print(ca_museum_jul18)
+# Fill in the line below: In October 2018, how many more visitors did Avila 
+# Adobe receive than the Firehouse Museum?
+avila_oct18 = museum_data['Avila Adobe'].loc['2018-10-01']- museum_data['Firehouse Museum'].loc['2018-10-01']
+print(avila_oct18)
+
+# Line chart showing the number of visitors to each museum over time
+sns.lineplot(data=museum_data)# Your code here
+
+plt.show()
+
+# Line plot showing the number of visitors to Avila Adobe over time
+# Set the width and height of the figure
+plt.figure(figsize=(12,6))
+
+# Add title
+plt.title("Monthly Visitors to Avila Adobe")
+# Line chart showing the number of visitors to Avila Adobe over time
+sns.lineplot(data=museum_data['Avila Adobe'])
+# Add label for horizontal axis
+plt.xlabel("Date")
+
+# Bar Chart
+
+# Path of the file to read
+flight_filepath = "../input/flight_delays.csv"
+
+# Read the file into a variable flight_data
+flight_data = pd.read_csv(flight_filepath, index_col="Month")
+
+# Set the width and height of the figure
+plt.figure(figsize=(10,6))
+
+# Add title
+plt.title("Average Arrival Delay for Spirit Airlines Flights, by Month")
+
+# Bar chart showing average arrival delay for Spirit Airlines flights by month
+sns.barplot(x=flight_data.index, y=flight_data['NK'])
+
+# Add label for vertical axis
+plt.ylabel("Arrival delay (in minutes)")
+
+
+#Heatmap
+# Set the width and height of the figure
+plt.figure(figsize=(14,7))
+
+# Add title
+plt.title("Average Arrival Delay for Each Airline, by Month")
+
+# Heatmap showing average arrival delay for each airline by month
+sns.heatmap(data=flight_data, annot=True)
+
+# Add label for horizontal axis
+plt.xlabel("Airline")
+
+# Change the style of the figure
+sns.set_style("dark")
+
+#ScatterPlot
+sns.scatterplot(x=insurance_data['bmi'], y=insurance_data['charges'])
+
+#ScatterPlot w/ regression
+sns.regplot(x=insurance_data['bmi'], y=insurance_data['charges'])
+#Color Coded Scatter
+sns.scatterplot(x=insurance_data['bmi'], y=insurance_data['charges'], hue=insurance_data['smoker'])
+
+#Color-coded scatter plot w/ regression lines
+sns.lmplot(x="bmi", y="charges", hue="smoker", data=insurance_data)
+
+#categorical scatter plot
+sns.swarmplot(x=insurance_data['smoker'], y=insurance_data['charges'])
+
+# Histogram 
+sns.distplot(a=iris_data['Petal Length (cm)'], kde=False)
+
+# kernel density estimate (KDE) plot
+sns.kdeplot(data=iris_data['Petal Length (cm)'], shade=True)
+
+#two-dimensional (2D) KDE plot
+sns.jointplot(x=iris_data['Petal Length (cm)'], y=iris_data['Sepal Width (cm)'], kind="kde")
+
+
+#Histograms
+sns.distplot(a=iris_data['Petal Length (cm)'], kde=False)
+
+#KDE plot 
+sns.kdeplot(data=iris_data['Petal Length (cm)'], shade=True)
+
+
+
